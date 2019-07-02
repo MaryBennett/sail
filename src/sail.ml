@@ -261,7 +261,7 @@ let options = Arg.align ([
     Arg.String (fun f -> Pretty_print_coq.opt_debug_on := f::!Pretty_print_coq.opt_debug_on),
     "<function> produce debug messages for Coq output on given function");
   ( "-cgen",
-    Arg.Tuple [Arg.set opt_print_cgen; set_target "cgen"],
+    set_target "cgen",
     " generate CGEN source");
   ( "-mono_split",
     Arg.String (fun s ->
