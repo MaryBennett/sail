@@ -1,6 +1,12 @@
 The Sail ISA specification language
 ===================================
 
+This is a fork of the RISC-V Sail model by the REMS team. This repository will:
+
+    add a CGEN make target
+    add a CGEN backend
+
+
 Overview
 ========
 
