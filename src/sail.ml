@@ -66,6 +66,7 @@ let opt_smt_serialize = ref false
 let opt_smt_fuzz = ref false
 let opt_libs_lem = ref ([]:string list)
 let opt_libs_coq = ref ([]:string list)
+let opt_print_cgen = ref false
 let opt_file_arguments = ref ([]:string list)
 let opt_process_elf : string option ref = ref None
 let opt_ocaml_generators = ref ([]:string list)
@@ -259,6 +260,9 @@ let options = Arg.align ([
   ( "-dcoq_debug_on",
     Arg.String (fun f -> Pretty_print_coq.opt_debug_on := f::!Pretty_print_coq.opt_debug_on),
     "<function> produce debug messages for Coq output on given function");
+  ( "-cgen",
+    Arg.set opt_print_cgen,
+    " generate CGEN source");
   ( "-mono_split",
     Arg.String (fun s ->
       let l = Util.split_on_char ':' s in
@@ -442,6 +446,9 @@ let target name out_name ast type_envs =
      in
      let out = match !opt_file_out with None -> "out" | Some s -> s in
      Ocaml_backend.ocaml_compile out ast ocaml_generator_info
+
+  | Some "cgen" ->
+     Cgen_backend.output type_envs ast
 
   | Some "tofrominterp" ->
      let out = match !opt_file_out with None -> "out" | Some s -> s in
