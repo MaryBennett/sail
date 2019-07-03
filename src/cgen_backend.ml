@@ -48,6 +48,8 @@
 (*  SUCH DAMAGE.                                                          *)
 (**************************************************************************)
 
+(* This is the file that generates CGEN source *)
+
 open Ast
 open Ast_util
 open PPrint
@@ -71,6 +73,7 @@ let rec list_registers = function
   | def :: defs ->
      list_registers defs
 
+(* Called by sail.ml *)
 let output env (Defs defs) =
   let xlenbits = mk_typ (Typ_id (mk_id "xlenbits")) in
   print_endline (string_of_typ (Type_check.Env.expand_synonyms env xlenbits));
